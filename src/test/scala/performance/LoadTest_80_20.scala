@@ -10,7 +10,7 @@ class LoadTest_80_20 extends Simulation {
   val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
 
   val chainTrue =
-    feed(csv("urls_20k.csv").random)
+    feed(csv("urls-100.csv").circular)
     .exec(
     http("nocache_true")
       .get("${url}")
@@ -18,7 +18,7 @@ class LoadTest_80_20 extends Simulation {
       .check(status.is(200)))
 
   val chainFalse =
-    feed(csv("urls_20k.csv").random)
+    feed(csv("urls-100.csv").circular)
     .exec(
     http("nocache_false")
       .get("${url}")
