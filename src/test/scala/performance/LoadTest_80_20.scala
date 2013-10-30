@@ -3,27 +3,27 @@ package performance
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
+import bootstrap._
 
 class LoadTest_80_20 extends Simulation {
 
   val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
 
-  val chainTrue = feed(csv("urls_20k.csv").random)
-  exec(
+  val chainTrue = exec(
     http("nocache_true")
       .get("${url}")
       .queryParam("nocache", "true")
       .check(status.is(200)))
 
-  val chainFalse = feed(csv("urls_no_host.csv").random)
-  exec(
+  val chainFalse = exec(
     http("nocache_false")
       .get("${url}")
       .queryParam("nocache", "false")
       .check(status.is(200)))
 
   val scn = scenario("FEP OD Load test")
-  exec(randomSwitch(
+  feed(csv("urls_20k.csv").random)
+  .exec(randomSwitch(
     80 -> chainFalse,
     20 -> chainTrue
   ))

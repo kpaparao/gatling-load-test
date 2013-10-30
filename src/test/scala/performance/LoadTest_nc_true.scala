@@ -7,6 +7,8 @@ import bootstrap._
 
 class LoadTest_nc_true extends Simulation {
 
+  val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
+
   val scn = scenario("FEP OD Load test")
     .feed(csv("urls_20k.csv").random)
     .exec(http("nocache_true").get("${url}")
@@ -16,10 +18,11 @@ class LoadTest_nc_true extends Simulation {
   setUp(scn
     .inject(
     ramp(20 users) over (20 seconds),
-    constantRate(20 usersPerSec) during (5 minutes),
+    constantRate(20 usersPerSec) during (15 seconds),
     rampRate(20 usersPerSec) to (1 usersPerSec) during (20 seconds)
   )
   )
+  .protocols(httpProtocol)
 }
 
 
