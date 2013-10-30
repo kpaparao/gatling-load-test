@@ -7,8 +7,8 @@ import scala.concurrent.duration._
 class LoadTest_nc_false extends Simulation {
 
   val scn = scenario("FEP OD Load test")
-    .feed(csv("urls_jboss_nocache.csv").random)
-    .exec(http("nocache_true").get("${url}")
+    .feed(csv("urls_20k.csv").random)
+    .exec(http("nocache_false").get("${url}")
       .check(status.is(200)))
       .pause(1, 2)
 

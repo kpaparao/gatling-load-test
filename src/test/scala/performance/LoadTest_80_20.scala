@@ -6,19 +6,37 @@ import scala.concurrent.duration._
 
 class LoadTest_80_20 extends Simulation {
 
-  val scn = scenario("FEP OD Load test")
-    .feed(csv("urls_80_20.csv").circular)
-    .exec(http("nocache_80_20").get("${url}")
+  val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
+
+  val chainTrue = feed(csv("urls_20k.csv").random)
+  exec(
+    http("nocache_true")
+      .get("${url}")
+      .queryParam("nocache", "true")
       .check(status.is(200)))
-      .pause(1, 2)
+
+  val chainFalse = feed(csv("urls_no_host.csv").random)
+  exec(
+    http("nocache_false")
+      .get("${url}")
+      .queryParam("nocache", "false")
+      .check(status.is(200)))
+
+  val scn = scenario("FEP OD Load test")
+  exec(randomSwitch(
+    80 -> chainFalse,
+    20 -> chainTrue
+  ))
+    .pause(1, 2)
 
   setUp(scn
     .inject(
-     ramp(20 users) over (20 seconds),
-     constantRate(20 usersPerSec) during (10 minutes),
-     rampRate(20 usersPerSec) to (1 usersPerSec) during (20 seconds)
-    )
+    ramp(5 users) over (10 seconds),
+    constantRate(5 usersPerSec) during (10 seconds),
+    rampRate(5 usersPerSec) to (1 usersPerSec) during (10 seconds)
   )
+  )
+    .protocols(httpProtocol)
 }
 
 
