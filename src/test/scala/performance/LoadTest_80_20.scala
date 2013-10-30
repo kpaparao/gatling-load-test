@@ -9,24 +9,27 @@ class LoadTest_80_20 extends Simulation {
 
   val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
 
-  val chainTrue = exec(
+  val chainTrue =
+    feed(csv("urls_20k.csv").random)
+    .exec(
     http("nocache_true")
       .get("${url}")
       .queryParam("nocache", "true")
       .check(status.is(200)))
 
-  val chainFalse = exec(
+  val chainFalse =
+    feed(csv("urls_20k.csv").random)
+    .exec(
     http("nocache_false")
       .get("${url}")
       .queryParam("nocache", "false")
       .check(status.is(200)))
 
   val scn = scenario("FEP OD Load test")
-  feed(csv("urls_20k.csv").random)
-  .exec(randomSwitch(
+  .randomSwitch(
     80 -> chainFalse,
     20 -> chainTrue
-  ))
+  )
     .pause(1, 2)
 
   setUp(scn
