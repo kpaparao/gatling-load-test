@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class LoadTest_nc_true_repeat extends Simulation {
+class LoadTest_nc_false_repeat extends Simulation {
 
   val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com")
   //http://platform-feeds-008.1515.mtvi.com:8080
