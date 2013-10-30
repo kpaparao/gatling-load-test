@@ -4,13 +4,13 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class LoadTest_nc_false extends Simulation {
+class LoadTest_nc_true_repeat extends Simulation {
 
   val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com/od/feed")
 
   val scn = scenario("FEP OD Load test")
-    .feed(csv("urls_20k.csv").random)
-    .exec(http("nocache_false").get("${url}")
+    .feed(csv("urls_100.csv").random)
+    .exec(http("nocache_true").get("${url}")
     .check(status.is(200)))
     .pause(1, 2)
 

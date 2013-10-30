@@ -34,9 +34,9 @@ class LoadTest_80_20 extends Simulation {
 
   setUp(scn
     .inject(
-    ramp(5 users) over (10 seconds),
-    constantRate(5 usersPerSec) during (10 seconds),
-    rampRate(5 usersPerSec) to (1 usersPerSec) during (10 seconds)
+    ramp(20 users) over (30 seconds),
+    constantRate(20 usersPerSec) during (5 minutes),
+    rampRate(20 usersPerSec) to (1 usersPerSec) during (30 seconds)
   )
   )
     .protocols(httpProtocol)
