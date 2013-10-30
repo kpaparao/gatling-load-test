@@ -10,7 +10,7 @@ class LoadTest_nc_true_repeat extends Simulation {
   //http://platform-feeds-008.1515.mtvi.com:8080
 
   val scn = scenario("FEP OD Load test")
-    .feed(csv("urls-100.csv").random)
+    .feed(csv("urls-100.csv").circular)
     .exec(http("nocache_true").get("${url}")
     .check(status.is(200)))
     .pause(1, 2)
