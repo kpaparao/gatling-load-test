@@ -11,6 +11,7 @@ class LoadTest_nc_true extends Simulation {
   val scn = scenario("FEP OD Load test")
     .feed(csv("urls_20k.csv").random)
     .exec(http("nocache_true").get("${url}")
+    .queryParam("nocache", "true")
     .check(status.is(200)))
     .pause(1, 2)
 
