@@ -12,13 +12,15 @@ class LoadTest_nc_true extends Simulation {
     .feed(csv("urls_20k.csv").random)
     .exec(http("nocache_true").get("${url}")
     .queryParam("nocache", "true")
-    .check(status.is(200)))
+    .check(status.is(200))
+    .check(bodyString.transform(_.map(_.size)).matchWith(io.gatling.core.check.Matchers.greaterThan, 100))
+  )
     .pause(1, 2)
 
   setUp(scn
     .inject(
-    ramp(20 users) over (30 seconds),
-    constantRate(20 usersPerSec) during (5 minutes),
+    rampRate(1 usersPerSec) to (20 usersPerSec) during (30 seconds),
+    constantRate(20 usersPerSec) during (20 seconds),
     rampRate(20 usersPerSec) to (1 usersPerSec) during (30 seconds)
   )
   )
