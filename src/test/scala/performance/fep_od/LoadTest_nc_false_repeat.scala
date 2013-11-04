@@ -25,12 +25,3 @@ class LoadTest_nc_false_repeat extends Simulation {
   )
     .protocols(httpProtocol)
 }
-
-
-
-
-
-
-
-
-

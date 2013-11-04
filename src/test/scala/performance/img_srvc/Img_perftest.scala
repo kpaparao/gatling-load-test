@@ -5,7 +5,7 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 import scala.util.Random
 
-class img_srvc_perftest extends Simulation {
+class Img_perftest extends Simulation {
 
   val httpProtocol = http.baseURL("http://nick-intl.mtvnimages-d.mtvi.com")
   val rand = new Random(System.currentTimeMillis())
@@ -21,19 +21,10 @@ class img_srvc_perftest extends Simulation {
 
   setUp(scn
     .inject(
-//    rampRate(1 usersPerSec) to (20 usersPerSec) during (30 seconds),
+    //    rampRate(1 usersPerSec) to (20 usersPerSec) during (30 seconds),
     constantRate(5 usersPerSec) during (20 seconds)//,
-//    rampRate(20 usersPerSec) to (1 usersPerSec) during (30 seconds)
+    //    rampRate(20 usersPerSec) to (1 usersPerSec) during (30 seconds)
   )
   )
     .protocols(httpProtocol)
 }
-
-
-
-
-
-
-
-
-
