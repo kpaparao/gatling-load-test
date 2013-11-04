@@ -5,7 +5,7 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 import scala.util.Random
 
-class Img_Srvc_Perftest extends Simulation {
+class img_srvc_perftest extends Simulation {
 
   val httpProtocol = http.baseURL("http://nick-intl.mtvnimages-d.mtvi.com")
   val rand = new Random(System.currentTimeMillis())
