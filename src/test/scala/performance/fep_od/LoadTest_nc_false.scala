@@ -1,4 +1,4 @@
-package performance
+package performance.fep_od
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
