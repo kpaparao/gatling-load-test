@@ -30,7 +30,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="FILE"/>
     </root>
 

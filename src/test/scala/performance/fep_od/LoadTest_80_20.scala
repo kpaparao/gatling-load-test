@@ -7,7 +7,7 @@ import bootstrap._
 
 class LoadTest_80_20 extends Simulation {
 
-  val httpProtocol = http.baseURL("http://platform-feeds-005.811.mtvi.com")
+  val httpProtocol = http.baseURL("http://platform-feeds-005.811.mtvi.com:8080")
 
   val chainTrue =
     feed(csv("urls-100.csv").circular)
