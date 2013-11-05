@@ -6,8 +6,9 @@ import scala.concurrent.duration._
 
 class LoadTest_nc_false_repeat extends Simulation {
 
-  val httpProtocol = http.baseURL("http://od.fep-d.mtvi.com")
-  //http://platform-feeds-008.1515.mtvi.com:8080
+  val httpProtocol = http.baseURL("http://platform-feeds-005.811.mtvi.com")
+//http://od.fep-d.mtvi.com
+//http://platform-feeds-008.1515.mtvi.com:8080
 
   val scn = scenario("FEP OD Load test")
     .feed(csv("urls-100.csv").circular)
