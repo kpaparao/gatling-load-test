@@ -22,6 +22,7 @@ class Img_perftest extends Simulation {
   setUp(scn
     .inject(
         rampRate(1 usersPerSec) to (20 usersPerSec) during (30 seconds),
+//        ramp(20 users) over (30 seconds),
         constantRate(20 usersPerSec) during (3 minutes),
         rampRate(20 usersPerSec) to (1 usersPerSec) during (30 seconds)
     )
