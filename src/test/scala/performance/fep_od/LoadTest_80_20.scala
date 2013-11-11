@@ -1,9 +1,7 @@
 package performance.fep_od
 
-import io.gatling.core.Predef._
-import io.gatling.http.Predef._
 import scala.concurrent.duration._
-import bootstrap._
+import io.gatling.core.Predef._
 
 class LoadTest_80_20 extends Simulation {
 
